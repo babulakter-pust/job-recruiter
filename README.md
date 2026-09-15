@@ -57,7 +57,7 @@ Pages automatically on every push to `main`.
 
 2. **Base path is already set** in `vite.config.js` to `job-tracker`,
    matching this project's repo name
-   (`https://github.com/rjbabul420/job-tracker`). If you ever rename the
+   (`https://github.com/babulakter07/job-tracker`). If you ever rename the
    repo, update `REPO_NAME` in `vite.config.js` to match, or the deployed
    site will fail to load its JS/CSS.
 
@@ -68,7 +68,7 @@ Pages automatically on every push to `main`.
    git add .
    git commit -m "Initial commit: job application tracker"
    git branch -M main
-   git remote add origin https://github.com/rjbabul420/job-tracker.git
+   git remote add origin https://github.com/babulakter07/job-tracker.git
    git push -u origin main
    ```
 
@@ -80,7 +80,7 @@ Pages automatically on every push to `main`.
    your app will be live at:
 
    ```
-   https://rjbabul420.github.io/job-tracker/
+   https://babulakter07.github.io/job-tracker/
    ```
 
 After this one-time setup, every future `git push` to `main` automatically
