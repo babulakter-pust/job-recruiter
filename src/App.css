@@ -208,9 +208,14 @@ form > label {
   flex: none;
 }
 
-/* Details modal (opened from a row) */
-.modal-details {
-  max-width: 640px;
+/* Details page */
+.details-page {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.back-btn {
+  margin-bottom: 16px;
 }
 
 .card-header {
