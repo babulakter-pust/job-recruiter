@@ -29,9 +29,12 @@ export default function ApplicationCard({
   onEdit,
   onUpdateStatus,
   onDelete,
+  onPrepare,
 }) {
   const [showTimeline, setShowTimeline] = useState(false)
   const nextInterviewDays = daysUntil(application.nextInterviewDate)
+  const prepItems = application.preparation || []
+  const prepReadyCount = prepItems.filter((i) => i.ready).length
 
   return (
     <div className="card">
@@ -85,6 +88,9 @@ export default function ApplicationCard({
         </button>
         <button className="btn btn-small btn-primary" onClick={() => onUpdateStatus(application)}>
           Update Status
+        </button>
+        <button className="btn btn-small" onClick={() => onPrepare(application)}>
+          Prep {prepItems.length > 0 ? `(${prepReadyCount}/${prepItems.length})` : ''}
         </button>
         <button className="btn btn-small" onClick={() => onEdit(application)}>
           Edit

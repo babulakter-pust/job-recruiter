@@ -4,6 +4,7 @@ import Toolbar from './components/Toolbar'
 import ApplicationCard from './components/ApplicationCard'
 import AddEditModal from './components/AddEditModal'
 import UpdateStatusModal from './components/UpdateStatusModal'
+import PreparationModal from './components/PreparationModal'
 import ConfirmDialog from './components/ConfirmDialog'
 import {
   loadApplications,
@@ -29,6 +30,7 @@ function App() {
   const [editingApp, setEditingApp] = useState(null)
   const [showAddModal, setShowAddModal] = useState(false)
   const [statusTargetApp, setStatusTargetApp] = useState(null)
+  const [prepTargetApp, setPrepTargetApp] = useState(null)
   const [deleteTargetApp, setDeleteTargetApp] = useState(null)
 
   useEffect(() => {
@@ -87,6 +89,11 @@ function App() {
     setStatusTargetApp(null)
   }
 
+  function handlePrepSave(app) {
+    setApplications((prev) => prev.map((a) => (a.id === app.id ? app : a)))
+    setPrepTargetApp(null)
+  }
+
   function handleDelete() {
     setApplications((prev) => prev.filter((a) => a.id !== deleteTargetApp.id))
     setDeleteTargetApp(null)
@@ -142,6 +149,7 @@ function App() {
               application={app}
               onEdit={setEditingApp}
               onUpdateStatus={setStatusTargetApp}
+              onPrepare={setPrepTargetApp}
               onDelete={setDeleteTargetApp}
             />
           ))}
@@ -164,6 +172,14 @@ function App() {
           application={statusTargetApp}
           onSave={handleStatusUpdate}
           onClose={() => setStatusTargetApp(null)}
+        />
+      )}
+
+      {prepTargetApp && (
+        <PreparationModal
+          application={prepTargetApp}
+          onSave={handlePrepSave}
+          onClose={() => setPrepTargetApp(null)}
         />
       )}
 

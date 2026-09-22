@@ -371,6 +371,78 @@ form > label {
   color: var(--text);
 }
 
+/* Preparation modal */
+.prep-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.prep-progress-track {
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.prep-progress-fill {
+  height: 100%;
+  background: #22c55e;
+  transition: width 0.2s ease;
+}
+
+.prep-progress-label {
+  font-size: 12px;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.prep-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.prep-item {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.prep-item-fields {
+  display: flex;
+  gap: 8px;
+}
+
+.prep-item-fields .input {
+  flex: 1;
+}
+
+.prep-item-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.prep-ready-toggle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text);
+  flex: none;
+}
+
+.prep-ready-toggle input {
+  width: 16px;
+  height: 16px;
+}
+
 /* Interview details in Update Status modal */
 .interview-details {
   border: 1px solid var(--border);
@@ -468,6 +540,9 @@ textarea.input {
     grid-template-columns: repeat(2, 1fr);
   }
   .form-row {
+    flex-direction: column;
+  }
+  .prep-item-fields {
     flex-direction: column;
   }
 }
