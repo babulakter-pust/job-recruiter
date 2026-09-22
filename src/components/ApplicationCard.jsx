@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import StatusBadge from './StatusBadge'
+import ProgressStepper from './ProgressStepper'
+import { RESULT_COLORS } from '../lib/constants'
 
 function formatDate(dateStr) {
   if (!dateStr) return '-'
@@ -41,6 +43,8 @@ export default function ApplicationCard({
         <StatusBadge status={application.status} />
       </div>
 
+      <ProgressStepper application={application} />
+
       <div className="card-meta">
         <span>Applied: {formatDate(application.appliedDate)}</span>
         {application.location && <span>{application.location}</span>}
@@ -68,7 +72,9 @@ export default function ApplicationCard({
         </div>
       )}
 
-      {application.notes && <p className="card-notes">{application.notes}</p>}
+      {application.description && (
+        <p className="card-notes">{application.description}</p>
+      )}
 
       <div className="card-actions">
         <button
@@ -95,9 +101,39 @@ export default function ApplicationCard({
             .reverse()
             .map((entry, idx) => (
               <li key={idx}>
-                <span className="timeline-date">{formatDate(entry.date)}</span>
-                <StatusBadge status={entry.status} />
-                {entry.note && <span className="timeline-note">{entry.note}</span>}
+                <div className="timeline-row">
+                  <span className="timeline-date">{formatDate(entry.date)}</span>
+                  <StatusBadge status={entry.status} />
+                  {entry.result && (
+                    <span
+                      className="result-badge"
+                      style={{ color: RESULT_COLORS[entry.result] }}
+                    >
+                      {entry.result}
+                    </span>
+                  )}
+                  {(entry.rating || entry.rating === 0) && (
+                    <span className="rating-badge">{entry.rating}/10</span>
+                  )}
+                  {entry.note && (
+                    <span className="timeline-note">{entry.note}</span>
+                  )}
+                </div>
+                {entry.questions?.length > 0 && (
+                  <ul className="qa-list">
+                    {entry.questions.map((q, qIdx) => (
+                      <li key={qIdx}>
+                        <strong>Q:</strong> {q.question}
+                        {q.answer && (
+                          <>
+                            {' '}
+                            <strong>A:</strong> {q.answer}
+                          </>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
         </ul>
