@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import StatsBar from './components/StatsBar'
 import Toolbar from './components/Toolbar'
-import ApplicationCard from './components/ApplicationCard'
+import ApplicationRow from './components/ApplicationRow'
+import ApplicationDetailsModal from './components/ApplicationDetailsModal'
 import AddEditModal from './components/AddEditModal'
 import UpdateStatusModal from './components/UpdateStatusModal'
 import PreparationModal from './components/PreparationModal'
@@ -32,6 +33,7 @@ function App() {
   const [statusTargetApp, setStatusTargetApp] = useState(null)
   const [prepTargetApp, setPrepTargetApp] = useState(null)
   const [deleteTargetApp, setDeleteTargetApp] = useState(null)
+  const [detailsTargetApp, setDetailsTargetApp] = useState(null)
 
   useEffect(() => {
     saveApplications(applications)
@@ -142,15 +144,12 @@ function App() {
             : 'No applications match your filters.'}
         </div>
       ) : (
-        <div className="card-grid">
+        <div className="app-list">
           {visibleApplications.map((app) => (
-            <ApplicationCard
+            <ApplicationRow
               key={app.id}
               application={app}
-              onEdit={setEditingApp}
-              onUpdateStatus={setStatusTargetApp}
-              onPrepare={setPrepTargetApp}
-              onDelete={setDeleteTargetApp}
+              onDetails={setDetailsTargetApp}
             />
           ))}
         </div>
@@ -180,6 +179,29 @@ function App() {
           application={prepTargetApp}
           onSave={handlePrepSave}
           onClose={() => setPrepTargetApp(null)}
+        />
+      )}
+
+      {detailsTargetApp && (
+        <ApplicationDetailsModal
+          application={detailsTargetApp}
+          onClose={() => setDetailsTargetApp(null)}
+          onEdit={(app) => {
+            setDetailsTargetApp(null)
+            setEditingApp(app)
+          }}
+          onUpdateStatus={(app) => {
+            setDetailsTargetApp(null)
+            setStatusTargetApp(app)
+          }}
+          onPrepare={(app) => {
+            setDetailsTargetApp(null)
+            setPrepTargetApp(app)
+          }}
+          onDelete={(app) => {
+            setDetailsTargetApp(null)
+            setDeleteTargetApp(app)
+          }}
         />
       )}
 

@@ -1,5 +1,5 @@
 .app {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 24px 20px 60px;
 }
@@ -123,20 +123,94 @@ form > label {
   font-size: 12px;
 }
 
-/* Card grid */
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 16px;
+/* Application list (horizontal rows) */
+.app-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.card {
+.app-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 16px;
+  padding: 12px 16px;
   box-shadow: var(--shadow);
   text-align: left;
+  cursor: pointer;
+}
+
+.app-row:hover {
+  border-color: var(--accent-border);
+}
+
+.row-title {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 220px;
+  min-width: 0;
+}
+
+.row-position {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-h);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.row-company {
+  font-size: 13px;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.step-indicator {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1 1 200px;
+  min-width: 160px;
+}
+
+.step-indicator-label {
+  font-size: 11px;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.step-indicator-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.step-indicator-fill {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.2s ease;
+}
+
+.step-indicator-fill-rejected {
+  background: var(--danger);
+}
+
+.row-details-btn {
+  flex: none;
+}
+
+/* Details modal (opened from a row) */
+.modal-details {
+  max-width: 640px;
 }
 
 .card-header {
@@ -544,5 +618,16 @@ textarea.input {
   }
   .prep-item-fields {
     flex-direction: column;
+  }
+  .app-row {
+    flex-wrap: wrap;
+  }
+  .step-indicator {
+    order: 3;
+    flex: 1 1 100%;
+  }
+  .row-details-btn {
+    order: 4;
+    width: 100%;
   }
 }
