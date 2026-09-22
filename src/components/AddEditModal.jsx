@@ -10,7 +10,7 @@ const emptyForm = {
   location: '',
   appliedDate: today(),
   salary: '',
-  notes: '',
+  description: '',
 }
 
 export default function AddEditModal({ application, onSave, onClose }) {
@@ -23,7 +23,7 @@ export default function AddEditModal({ application, onSave, onClose }) {
           location: application.location || '',
           appliedDate: application.appliedDate,
           salary: application.salary || '',
-          notes: application.notes || '',
+          description: application.description || '',
         }
       : emptyForm,
   )
@@ -111,9 +111,10 @@ export default function AddEditModal({ application, onSave, onClose }) {
               />
             </label>
             <label>
-              Salary / Notes on pay
+              Salary
               <input
                 className="input"
+                placeholder="e.g. $80k - $95k"
                 value={form.salary}
                 onChange={(e) => update('salary', e.target.value)}
               />
@@ -121,12 +122,13 @@ export default function AddEditModal({ application, onSave, onClose }) {
           </div>
 
           <label>
-            Notes
+            Description
             <textarea
               className="input"
               rows={3}
-              value={form.notes}
-              onChange={(e) => update('notes', e.target.value)}
+              placeholder="Job description / responsibilities..."
+              value={form.description}
+              onChange={(e) => update('description', e.target.value)}
             />
           </label>
 

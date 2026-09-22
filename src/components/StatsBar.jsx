@@ -4,7 +4,7 @@ export default function StatsBar({ applications }) {
     (a) => !['Offer', 'Rejected', 'Withdrawn'].includes(a.status),
   ).length
   const interviews = applications.filter((a) =>
-    a.status.startsWith('Round') || a.status === 'Interview Scheduled',
+    a.status.includes('Interview'),
   ).length
   const offers = applications.filter((a) => a.status === 'Offer').length
   const rejected = applications.filter((a) => a.status === 'Rejected').length

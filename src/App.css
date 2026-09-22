@@ -206,6 +206,116 @@ form > label {
   white-space: nowrap;
 }
 
+/* Progress stepper (LinkedIn-style application progress bar) */
+.stepper {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 12px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.stepper-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  flex: 1 1 0;
+  min-width: 64px;
+}
+
+.stepper-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--surface);
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.stepper-line {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background: var(--border);
+  z-index: 0;
+}
+
+.stepper-line-done {
+  background: #22c55e;
+}
+
+.stepper-label {
+  margin-top: 6px;
+  font-size: 10px;
+  color: var(--text);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.stepper-done .stepper-dot {
+  background: #22c55e;
+  border-color: #22c55e;
+  color: white;
+}
+
+.stepper-done .stepper-label {
+  color: var(--text-h);
+}
+
+.stepper-current .stepper-dot {
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+.stepper-current .stepper-label {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.stepper-rejected .stepper-dot {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: white;
+}
+
+.stepper-rejected .stepper-label {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.stepper-tag {
+  align-self: center;
+  margin-left: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+  background: var(--border);
+  color: var(--text-h);
+}
+
+.stepper-tag-on-hold {
+  background: #a8a29e33;
+  color: #a8a29e;
+}
+
+.stepper-tag-withdrawn {
+  background: #78716c33;
+  color: #78716c;
+}
+
 /* Timeline */
 .timeline {
   list-style: none;
@@ -214,14 +324,17 @@ form > label {
   border-top: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .timeline li {
+  font-size: 12px;
+}
+
+.timeline-row {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 12px;
   flex-wrap: wrap;
 }
 
@@ -232,6 +345,134 @@ form > label {
 
 .timeline-note {
   color: var(--text);
+}
+
+.result-badge,
+.rating-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--border);
+}
+
+.rating-badge {
+  color: var(--text-h);
+}
+
+.qa-list {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0 0 0 12px;
+  border-left: 2px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--text);
+}
+
+/* Preparation modal */
+.prep-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.prep-progress-track {
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.prep-progress-fill {
+  height: 100%;
+  background: #22c55e;
+  transition: width 0.2s ease;
+}
+
+.prep-progress-label {
+  font-size: 12px;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.prep-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.prep-item {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.prep-item-fields {
+  display: flex;
+  gap: 8px;
+}
+
+.prep-item-fields .input {
+  flex: 1;
+}
+
+.prep-item-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.prep-ready-toggle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text);
+  flex: none;
+}
+
+.prep-ready-toggle input {
+  width: 16px;
+  height: 16px;
+}
+
+/* Interview details in Update Status modal */
+.interview-details {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 12px;
+  background: var(--accent-bg);
+}
+
+.qa-section {
+  margin-top: 4px;
+}
+
+.qa-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.qa-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.qa-row .input {
+  flex: 1;
 }
 
 /* Empty state */
@@ -299,6 +540,9 @@ textarea.input {
     grid-template-columns: repeat(2, 1fr);
   }
   .form-row {
+    flex-direction: column;
+  }
+  .prep-item-fields {
     flex-direction: column;
   }
 }
