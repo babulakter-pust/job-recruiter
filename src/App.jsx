@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { HashRouter, Routes, Route, useNavigate } from 'react-router-dom'
 import ListPage from './pages/ListPage'
 import DetailsPage from './pages/DetailsPage'
+import LoginPage from './pages/LoginPage'
 import AddEditModal from './components/AddEditModal'
 import UpdateStatusModal from './components/UpdateStatusModal'
 import PreparationModal from './components/PreparationModal'
@@ -12,10 +13,12 @@ import {
   exportApplicationsToFile,
   importApplicationsFromFile,
 } from './lib/storage'
+import { isAuthenticated, logout } from './lib/auth'
 import './App.css'
 
 function AppShell() {
   const navigate = useNavigate()
+  const [authed, setAuthed] = useState(() => isAuthenticated())
   const [applications, setApplications] = useState(() => loadApplications())
 
   const [editingApp, setEditingApp] = useState(null)
@@ -56,6 +59,12 @@ function AppShell() {
     navigate('/')
   }
 
+  function handleLogout() {
+    logout()
+    setAuthed(false)
+    navigate('/')
+  }
+
   async function handleImport(file) {
     try {
       const imported = await importApplicationsFromFile(file)
@@ -66,6 +75,14 @@ function AppShell() {
     } catch (err) {
       window.alert(err.message)
     }
+  }
+
+  if (!authed) {
+    return (
+      <div className="app">
+        <LoginPage onLogin={() => setAuthed(true)} />
+      </div>
+    )
   }
 
   return (
@@ -79,6 +96,7 @@ function AppShell() {
               onAddNew={() => setShowAddModal(true)}
               onExport={() => exportApplicationsToFile(applications)}
               onImport={handleImport}
+              onLogout={handleLogout}
             />
           }
         />

@@ -11,7 +11,13 @@ function sortKeyForDate(dateStr) {
   return target.getTime()
 }
 
-export default function ListPage({ applications, onAddNew, onExport, onImport }) {
+export default function ListPage({
+  applications,
+  onAddNew,
+  onExport,
+  onImport,
+  onLogout,
+}) {
   const navigate = useNavigate()
   const [search, setSearch] = useState('')
   const [statusFilter, setStatusFilter] = useState('all')
@@ -58,11 +64,16 @@ export default function ListPage({ applications, onAddNew, onExport, onImport })
   return (
     <>
       <header className="app-header">
-        <h1>Job Application Tracker</h1>
-        <p className="app-subtitle">
-          Track every application from applied to offer — stored locally in
-          your browser.
-        </p>
+        <div>
+          <h1>Job Application Tracker</h1>
+          <p className="app-subtitle">
+            Track every application from applied to offer — stored locally in
+            your browser.
+          </p>
+        </div>
+        <button className="btn btn-small" onClick={onLogout}>
+          Log Out
+        </button>
       </header>
 
       <StatsBar applications={applications} />
